@@ -7,7 +7,6 @@ class Board
   end
   
   def print_grid
-    puts @grid
     @grid.each do |arr|
       puts arr.join(" ")
     end
