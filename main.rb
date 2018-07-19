@@ -53,10 +53,6 @@ class Board
       place_single_ship(ship)
     end
   end
-
-  def generate_random_coordinates(length)
-    offset = length - 1
-  end
 end
 
 fleet = [
@@ -76,13 +72,13 @@ fleet = [
     :length => 3
   },
   {
-    :name => 'Cruiser',
-    :id => 'C',
+    :name => 'Battleship',
+    :id => 'B',
     :length => 4
   },
   {
-    :name => 'Battleship',
-    :id => 'B',
+    :name => 'Carrier',
+    :id => 'C',
     :length => 5
   }
 ]
