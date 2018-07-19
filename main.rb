@@ -14,12 +14,30 @@ class Board
 
   private
   
-  def detect_ship(x, y, direction)
+  def path_clear?(x, y, direction, ship_length)
+    ship_length.times do
+      if direction == 0
+        if @grid[y][x] != '.'
+          return false
+        else
+          x += 1
+        end
+      else
+        if @grid[y][x] != '.'
+          return false
+        else
+          y += 1
+        end
+      end
+    end
+
+    return true
   end
 
   def place_single_ship(ship)
     direction = Random.rand(2)
     offset = ship[:length] - 1
+
     if direction == 0
       x = Random.rand(10 - offset)
       y = Random.rand(10)
@@ -27,14 +45,19 @@ class Board
       x = Random.rand(10)
       y = Random.rand(10 - offset)
     end
-    ship[:length].times do
-      if direction == 0
-        @grid[y][x] = ship[:id]
-        x += 1
-      else
-        @grid[y][x] = ship[:id]
-        y += 1
+
+    if path_clear?(x, y, direction, ship[:length])
+      ship[:length].times do
+        if direction == 0
+          @grid[y][x] = ship[:id]
+          x += 1
+        else
+          @grid[y][x] = ship[:id]
+          y += 1
+        end
       end
+    else
+      place_single_ship(ship)
     end
   end
 
