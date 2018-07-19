@@ -6,6 +6,8 @@ class Board
     place_all_ships
   end
   
+  # i think this fits with SOLID principles
+  # this single responsibilty of this class is to populate the board
   def print_grid
     @grid.each do |arr|
       puts arr.join(" ")
@@ -14,6 +16,9 @@ class Board
 
   private
   
+  # this method checks the grid vertically or horizontally
+  # and if the path is clear it returns true so the ship
+  # can be placed
   def path_clear?(x, y, direction, ship_length)
     ship_length.times do
       if direction == 0
@@ -34,6 +39,8 @@ class Board
     return true
   end
 
+  # places a single ship on the board randomly with
+  # an offset based on the random direction and length
   def place_single_ship(ship)
     direction = Random.rand(2)
     offset = ship[:length] - 1
@@ -78,6 +85,9 @@ class Board
   end
 end
 
+# i know that the rules are pretty consistent in battleship
+# but i have an aversion to hard coding variables so i am
+# passing in this data as a hash 
 fleet = [
   {
     :name => 'Tug',
