@@ -14,15 +14,28 @@ class Board
 
   private
   
-  def detect_ship(x, y)
+  def detect_ship(x, y, direction)
   end
 
   def place_single_ship(ship)
     direction = Random.rand(2)
     offset = ship[:length] - 1
-    x = Random.rand(10 - offset)
-    y = Random.rand(10 - offset)
-    @grid[y][x] = ship[:id]
+    if direction == 0
+      x = Random.rand(10 - offset)
+      y = Random.rand(10)
+    else
+      x = Random.rand(10)
+      y = Random.rand(10 - offset)
+    end
+    ship[:length].times do
+      if direction == 0
+        @grid[y][x] = ship[:id]
+        x += 1
+      else
+        @grid[y][x] = ship[:id]
+        y += 1
+      end
+    end
   end
 
   def populate_grid
